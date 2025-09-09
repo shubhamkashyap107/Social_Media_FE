@@ -3,6 +3,11 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import  { Toaster } from 'react-hot-toast';
+import Home from './Components/Home';
+import ProtectedRoutes from './Components/ProtectedRoutes';
+import Profile from './Components/Profile';
+import Chats from './Components/Chats';
+import NewPost from './Components/NewPost';
 
 
 export const uiContext =  createContext()
@@ -19,6 +24,13 @@ const App = () => {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/' element={<ProtectedRoutes />} >
+          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/chats' element={<Chats />} />
+          <Route path='/add' element={<NewPost />} />
+        </Route>
       </Routes>
     </div>
 

@@ -3,16 +3,23 @@ import { useNavigate } from "react-router-dom";
 import validator from 'validator';
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addUserData } from "../Utils/UserSlice";
 
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("gunjan");
+  const [password, setPassword] = useState("Gunjan!123");
   const nav = useNavigate()
+  const dispatch = useDispatch()
 
 
   const btnCLickHandler = () => {
-    if( username.length > 15 || username.length < 2)
+    if(validator.isEmail(username))
+    {
+
+    }
+    else if( username.length > 15 || username.length < 2 )
     {
         toast.error("Username should be atleast 2 characters and maximum 15 characters")
         return
@@ -27,6 +34,8 @@ const Login = () => {
     {
         try {
             const res = await axios.post(import.meta.env.VITE_DOMAIN + "/api/auth/signin", {[isMail ? "mail" : "username"] : username, password}, {withCredentials  : true})
+            // console.log(res.data.data)
+            dispatch(addUserData(res.data.data))
             nav("/home")
         } catch (error) {
             setUsername("")
