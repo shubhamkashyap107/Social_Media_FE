@@ -6,7 +6,15 @@ const Profile = () => {
   return (
     <div>
         <Navbar />
-        <Sidebar />
+
+        <div>
+
+          <Sidebar />
+          <div>
+            
+          </div>
+        
+        </div>
     </div>
   )
 }

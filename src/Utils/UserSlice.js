@@ -9,6 +9,9 @@ const userSlice = createSlice({
         },
         clearData : (state,action) => {
             return null
+        },
+        addPost : (state, action) => {
+            state.posts.push(action.payload)
         }
     }
 })
@@ -16,6 +19,6 @@ const userSlice = createSlice({
 
 
 export default userSlice.reducer
-export const {addUserData, clearData} = userSlice.actions
+export const {addUserData, clearData, addPost} = userSlice.actions
 
 
