@@ -8,6 +8,7 @@ import ProtectedRoutes from './Components/ProtectedRoutes';
 import Profile from './Components/Profile';
 import Chats from './Components/Chats';
 import NewPost from './Components/NewPost';
+import EditProfile from './Components/EditProfile';
 
 
 export const uiContext =  createContext()
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/chats' element={<Chats />} />
           <Route path='/add' element={<NewPost />} />
+          <Route path='/profile/edit' element={<EditProfile />} />
         </Route>
       </Routes>
     </div>
