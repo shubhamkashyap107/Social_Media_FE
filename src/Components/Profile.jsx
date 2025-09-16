@@ -77,12 +77,7 @@ const Profile = () => {
                 <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600">
                   {userData.firstName} {userData.lastName}
                 </p>
-                <button
-                  onClick={() => nav("/profile/edit")}
-                  className="px-5 py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 active:scale-95 transition"
-                >
-                  Edit Profile
-                </button>
+               
               </div>
 
               {/* Followers / Following */}
@@ -102,6 +97,25 @@ const Profile = () => {
               <p className="text-sm leading-6 text-gray-800 max-w-md italic">
                 {userData.bio}
               </p>
+
+              <div className='flex gap-2'>
+
+               <button
+                  onClick={() => nav("/profile/edit")}
+                  className="px-5 py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 active:scale-95 transition"
+                >
+                  Edit Profile
+                </button>
+
+                <button
+                  onClick={() => nav("/profile/edit/password")}
+                  className="px-5 py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 active:scale-95 transition"
+                >
+                  Change Password
+                </button>
+
+              </div>
+
             </div>
           </div>
 
