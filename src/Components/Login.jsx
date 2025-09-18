@@ -8,8 +8,8 @@ import { addUserData } from "../Utils/UserSlice";
 
 
 const Login = () => {
-  const [username, setUsername] = useState("gunjan");
-  const [password, setPassword] = useState("Gunjan!123");
+  const [username, setUsername] = useState("shubham");
+  const [password, setPassword] = useState("Testing123!");
   const nav = useNavigate()
   const dispatch = useDispatch()
 
