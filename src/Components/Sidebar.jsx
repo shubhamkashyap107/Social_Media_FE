@@ -70,6 +70,14 @@ const Sidebar = () => {
           {showSidebar && <span>Add New Post</span>}
         </Link>
 
+        <Link
+          to="/review-requests"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/60 hover:shadow-md transition"
+        >
+          <i className="fa-solid fa-user-group"></i>
+          {showSidebar && <span>Review Requests</span>}
+        </Link>
+
        {showSidebar && <ToggleSwitch label={"Private Account"} />}
       </nav>
 
