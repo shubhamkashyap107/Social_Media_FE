@@ -26,7 +26,7 @@ const Sidebar = () => {
   return (
     <div
       className={
-        "h-screen bg-gradient-to-b from-pink-200 via-purple-200 to-blue-200 flex flex-col p-4 space-y-6 transition-all duration-300 shadow-lg " +
+        "min-h-screen bg-gradient-to-b from-pink-200 via-purple-200 to-blue-200 flex flex-col p-4 space-y-6 transition-all duration-300 shadow-lg " +
         (showSidebar ? "w-64" : "w-20")
       }
     >
@@ -81,8 +81,6 @@ const Sidebar = () => {
        {showSidebar && <ToggleSwitch label={"Private Account"} />}
       </nav>
 
-      {/* Spacer */}
-      <div className="flex-grow"></div>
 
       {/* Logout Button */}
       {showSidebar && (

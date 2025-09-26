@@ -16,7 +16,7 @@ const ViewProfile = () => {
     async function getProfile()
     {
       const res = await axios.get(import.meta.env.VITE_DOMAIN + `/api/profile/${userId}`, {withCredentials : true})
-      console.log(res)
+      console.log(res) 
       setIsPrivate(res.data.data.isPrivate)
       setUserData(res.data.data)
     }
@@ -33,7 +33,7 @@ const ViewProfile = () => {
       <div className='flex'>
         <Sidebar />
 
-        {isPrivate ? <PrivateAccount data={userData} /> : <Public data={userData} />}
+        {isPrivate ? <PrivateAccount data={userData} setData={setUserData} /> : <Public data={userData} />}
 
 
       </div>
