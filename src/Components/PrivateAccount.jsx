@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const PrivateAccount = ({data, setData}) => {
 
@@ -9,6 +9,7 @@ const PrivateAccount = ({data, setData}) => {
   const userSliceData = useSelector(store => store.user)
   const[isFollowing, setIsFollowing] = useState(userSliceData.following.some(item => item == userId))
   const[isReqSent, setIsReqSent] = useState(false)
+  const nav = useNavigate()
 
   useEffect(() => {
 
@@ -109,6 +110,11 @@ const PrivateAccount = ({data, setData}) => {
             >
               {isFollowing ? "Unfollow" : (isReqSent ? "Pending" : "Follow")}
             </button>
+
+
+            <button className='px-4 py-1 rounded-lg text-sm font-medium transition bg-gray-200 text-gray-700 hover:bg-gray-300' onClick={() => {
+              nav("/chat/" + userId)
+            }}>Message</button>
 
        
           </div>

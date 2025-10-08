@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Heart, MessageCircle, Send, Bookmark } from "lucide-react"
 import PostModal from "./PostModal"
+import axios from "axios"
 const Feed = ({ posts }) => {
   return (
     <div className="max-w-xl mx-auto mt-6 space-y-6 ">
@@ -20,13 +21,42 @@ const PostCard = ({ post }) => {
   const [commentLikes, setCommentLikes] = useState(
     post.comments.reduce((acc, c) => ({ ...acc, [c._id]: c.likes.includes(post.author._id) }), {})
   )
+  // console.log(commentLikes)
   const [replyInputs, setReplyInputs] = useState({}) // text input per comment
   const[useModal, setUseModal] = useState(false)
 
+  // console.log(post)
+
   const toggleLikePost = () => {
-    setLiked(!liked)
-    setLikesCount((prev) => (liked ? prev - 1 : prev + 1))
+    // setLiked(!liked)
+    // setLikesCount((prev) => (liked ? prev - 1 : prev + 1))
     // TODO: API call to toggle post like
+
+    async function like()
+    {
+      const likeRes = axios.patch(import.meta.env.VITE_DOMAIN +  `/api/posts/${post._id}/like`, {}, {withCredentials : true})
+      console.log(likeRes)
+      setLiked(prev => !prev)
+      setLikesCount((prev) => (prev + 1))
+
+    }
+
+    async function unlike() {
+      const unlikeRes = axios.patch(import.meta.env.VITE_DOMAIN + `/api/posts/${post._id}/unlike`, {}, {withCredentials : true})
+      console.log(unlikeRes)
+      setLiked(prev => !prev)
+      setLikesCount((prev) => (prev - 1))
+
+    }
+    if(liked)
+    {
+      unlike()
+    }
+    else
+    {
+      like()
+    }
+
   }
 
   const toggleLikeComment = (commentId) => {
@@ -35,19 +65,32 @@ const PostCard = ({ post }) => {
       [commentId]: !prev[commentId],
     }))
     // TODO: API call to toggle comment like
+    async function likeComment()
+    {
+      const res = await axios.post(import.meta.env.VITE_DOMAIN + `/api/comments/${post._id}/${commentId}/like`, {}, {withCredentials : true})
+      console.log(res)
+    }
+
+    async function unlikeComment()
+    {
+      const res = await axios.patch(import.meta.env.VITE_DOMAIN + `/api/comments/${post._id}/${commentId}/unlike`, {}, {withCredentials : true})
+      console.log(res)
+    }
+
+    const isLiked = commentLikes[commentId]
+    if(isLiked)
+    {
+      unlikeComment()
+    }
+    else
+    {
+      likeComment()
+    }
+
+    
   }
 
-  const handleReplyChange = (commentId, text) => {
-    setReplyInputs((prev) => ({ ...prev, [commentId]: text }))
-  }
 
-  const submitReply = (commentId) => {
-    const text = replyInputs[commentId]?.trim()
-    if (!text) return
-    // TODO: API call to submit reply
-    console.log(`Reply to ${commentId}: ${text}`)
-    setReplyInputs((prev) => ({ ...prev, [commentId]: "" }))
-  }
 
   return (
     <div className="bg-white rounded-xl shadow-md ">
@@ -151,17 +194,17 @@ const PostCard = ({ post }) => {
                     </p>
 
                     {/* Reply toggle */}
-                    <p className="text-xs text-gray-500 mt-1 cursor-pointer">
+                    {/* <p className="text-xs text-gray-500 mt-1 cursor-pointer">
                       <span onClick={() =>
                         setOpenReplies((prev) => ({ ...prev, [c._id]: !prev[c._id] }))
                       }>
                         {c.reply?.length > 0 &&
                           (openReplies[c._id] ? "Hide replies" : `View replies (${c.reply.length})`)}
                       </span>
-                    </p>
+                    </p> */}
 
                     {/* Reply input */}
-                    <div className="mt-1">
+                    {/* <div className="mt-1">
                       <input
                         type="text"
                         placeholder="Reply..."
@@ -172,10 +215,10 @@ const PostCard = ({ post }) => {
                           if (e.key === "Enter") submitReply(c._id)
                         }}
                       />
-                    </div>
+                    </div> */}
 
                     {/* Replies */}
-                    {openReplies[c._id] &&
+                    {/* {openReplies[c._id] &&
                       c.reply?.map((r) => (
                         <div key={r._id} className="flex items-start space-x-2 ml-8 mt-1">
                           <img
@@ -188,7 +231,7 @@ const PostCard = ({ post }) => {
                             {r.text}
                           </p>
                         </div>
-                      ))}
+                      ))} */}
                   </div>
                 </div>
               </div>

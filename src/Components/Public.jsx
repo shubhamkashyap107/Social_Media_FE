@@ -2,13 +2,14 @@ import axios from "axios"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { addUserData } from "../Utils/UserSlice"
 
 const Public = ({ data }) => {
   const { userId } = useParams()
   const userSliceData = useSelector((store) => store.user)
   const dispatch = useDispatch()
+  const nav = useNavigate()
  
 
   const [isFollowing, setIsFollowing] = useState(
@@ -99,6 +100,10 @@ const Public = ({ data }) => {
             >
               {isFollowing ? "Following" : "Follow"}
             </button>
+
+            <button onClick={() => {
+              nav("/chat/" + userId)
+            }} className="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-1 rounded-lg text-sm font-medium transition">Message</button>
           </div>
 
           {/* Stats */}

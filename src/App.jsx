@@ -12,6 +12,7 @@ import EditProfile from './Components/EditProfile';
 import EditPassword from './Components/EditPassword';
 import ViewProfile from './Components/ViewProfile';
 import Requests from './Components/Requests';
+import ChatBox from './Components/ChatBox';
 
 
 export const uiContext =  createContext()
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/chats' element={<Chats />} />
+          <Route path='/chat/:id' element={<ChatBox />} />
           <Route path='/add' element={<NewPost />} />
           <Route path='/profile/edit' element={<EditProfile />} />
           <Route path='/profile/edit/password' element={<EditPassword />} />

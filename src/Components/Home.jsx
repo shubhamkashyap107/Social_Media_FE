@@ -10,7 +10,7 @@ const Home = () => {
   
 
   const[posts,setPosts] = useState([])
-  console.log(posts)
+  // console.log(posts)
   useEffect(() => {
     async function getData()
     {
